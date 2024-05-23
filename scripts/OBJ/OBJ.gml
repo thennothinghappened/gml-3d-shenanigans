@@ -279,13 +279,10 @@ function ObjFile(smooth_shading = false) constructor {
 					
 				}
 				
-				var normal_light_dot;
-				
-				try {
-					normal_light_dot = dot_product_3d_normalized(normalX, normalY, normalZ, testing_light_dir[X], testing_light_dir[Y], testing_light_dir[Z]);
-				} catch (e) {
-					throw $"{self.name} - normal index {normal_index}, num normals: {buffer_tell(self.normals) / (f32_size * 3)}, normal found: {normalX} {normalY} {normalZ} {e.longMessage}";
-				}
+				var normal_light_dot = dot_product_3d_normalized(
+					normalX, normalY, normalZ, 
+					testing_light_dir[X], testing_light_dir[Y], testing_light_dir[Z]
+				);
 				
 				vertex_position_3d(vb, vertexX, vertexY, vertexZ);
 				vertex_texcoord(vb, texcoordX, texcoordY);

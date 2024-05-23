@@ -25,12 +25,9 @@
     {"$GMFolder":"","%Name":"Sprites","folderPath":"folders/Sprites.yy","name":"Sprites","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "IncludedFiles":[
-    {"$GMIncludedFile":"","%Name":"beetle.obj","CopyToMask":-1,"filePath":"datafiles","name":"beetle.obj","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"Cube.obj","CopyToMask":-1,"filePath":"datafiles","name":"Cube.obj","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"Monkey.obj","CopyToMask":-1,"filePath":"datafiles","name":"Monkey.obj","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"PlaneTest.obj","CopyToMask":-1,"filePath":"datafiles","name":"PlaneTest.obj","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"","%Name":"xyzrgb_dragon_with_normals.obj","CopyToMask":-1,"filePath":"datafiles","name":"xyzrgb_dragon_with_normals.obj","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
-    {"$GMIncludedFile":"","%Name":"xyzrgb_dragon.obj","CopyToMask":-1,"filePath":"datafiles","name":"xyzrgb_dragon.obj","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
   ],
   "isEcma":false,
   "LibraryEmitters":[],

@@ -9,6 +9,7 @@ show_debug_overlay(true);
 #region 3D Settings
 
 gpu_set_ztestenable(true);
+display_reset(2, false);
 
 #endregion
 

@@ -2,7 +2,9 @@
 
 vb = vertex_create_buffer();
 
-var b = buffer_load("xyzrgb_dragon_with_normals.obj");
+//sprite_index = sprite_add(get_open_filename("Image|*.png", ""), 0, false, false, 0, 0);
+sprite_index = sTest;
+var b = buffer_load(get_open_filename("OBJ File|*.obj", ""));
 text = buffer_read(b, buffer_text);
 buffer_delete(b);
 
