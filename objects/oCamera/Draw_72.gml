@@ -16,4 +16,6 @@ camera_set_view_mat(cam, matrix_build_lookat(x_lookfrom + x, y_lookfrom + y, z_l
 
 camera_apply(cam);
 
+shader_set(shdVertexLit);
+shader_set_uniform_f_array(shader_get_uniform(shdVertexLit, "light_direction"), testing_light_dir);
 

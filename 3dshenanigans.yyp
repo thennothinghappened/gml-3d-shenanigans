@@ -53,6 +53,7 @@
     {"id":{"name":"Vec2","path":"scripts/Vec2/Vec2.yy",},},
     {"id":{"name":"Vec3","path":"scripts/Vec3/Vec3.yy",},},
     {"id":{"name":"vformat","path":"scripts/vformat/vformat.yy",},},
+    {"id":{"name":"shdVertexLit","path":"shaders/shdVertexLit/shdVertexLit.yy",},},
     {"id":{"name":"sTest","path":"sprites/sTest/sTest.yy",},},
   ],
   "resourceType":"GMProject",

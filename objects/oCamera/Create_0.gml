@@ -1,5 +1,7 @@
 /// @desc 
 
+testing_light_dir = [0, 0.2, 0.5];
+
 cam = camera_create();
 
 look_angle = {

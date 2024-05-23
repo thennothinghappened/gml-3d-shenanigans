@@ -232,7 +232,6 @@ function ObjFile(smooth_shading = false) constructor {
 		/// @param {String} name The object's name to append to the buffer.
 	static write_to_buffer = function(vb, name) {
 		
-		static testing_light_dir = [0, 0.2, -0.5];
 		static default_texcoord = [0, 0];
 		static default_normal = [0, 0, 0];
 		
@@ -279,15 +278,15 @@ function ObjFile(smooth_shading = false) constructor {
 					
 				}
 				
-				var normal_light_dot = dot_product_3d_normalized(
-					normalX, normalY, normalZ, 
-					testing_light_dir[X], testing_light_dir[Y], testing_light_dir[Z]
-				);
+				//var normal_light_dot = dot_product_3d_normalized(
+				//	normalX, normalY, normalZ, 
+				//	testing_light_dir[X], testing_light_dir[Y], testing_light_dir[Z]
+				//);
 				
 				vertex_position_3d(vb, vertexX, vertexY, vertexZ);
 				vertex_texcoord(vb, texcoordX, texcoordY);
 				vertex_normal(vb, normalX, normalY, normalZ);
-				vertex_colour(vb, make_color_hsv(0, 10, normal_light_dot * 127 + 127), 1);
+				vertex_colour(vb, c_white, 1);
 				
 			}
 			
