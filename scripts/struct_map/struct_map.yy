@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"struct_map",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"struct_map",
+  "parent":{
+    "name":"Struct",
+    "path":"folders/Scripts/Util/Struct.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

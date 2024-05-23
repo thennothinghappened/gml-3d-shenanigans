@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"string_bool",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"string_bool",
+  "parent":{
+    "name":"String",
+    "path":"folders/Scripts/Util/String.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

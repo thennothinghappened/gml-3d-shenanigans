@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"struct_map_to_array",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"struct_map_to_array",
+  "parent":{
+    "name":"Struct",
+    "path":"folders/Scripts/Util/Struct.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

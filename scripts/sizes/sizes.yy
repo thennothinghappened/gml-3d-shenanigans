@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"sizes",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"sizes",
+  "parent":{
+    "name":"Buffer",
+    "path":"folders/Scripts/Util/Buffer.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
