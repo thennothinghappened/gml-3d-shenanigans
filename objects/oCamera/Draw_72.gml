@@ -19,3 +19,4 @@ camera_apply(cam);
 shader_set(shdVertexLit);
 shader_set_uniform_f_array(shader_get_uniform(shdVertexLit, "light_direction"), testing_light_dir);
 
+draw_clear(c_red);

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"Err",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"Err",
+  "parent":{
+    "name":"Error",
+    "path":"folders/Scripts/Util/Error.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

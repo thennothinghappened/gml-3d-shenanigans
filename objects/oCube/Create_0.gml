@@ -1,23 +1,30 @@
 /// @desc 
 
-vb = vertex_create_buffer();
+x = random_range(-50, 50);
+y = random_range(-50, 50);
+z = random_range(-50, 50);
 
-//sprite_index = sprite_add(get_open_filename("Image|*.png", ""), 0, false, false, 0, 0);
+vb = undefined;
+
 sprite_index = sTest;
-var b = buffer_load(get_open_filename("OBJ File|*.obj", ""));
-text = buffer_read(b, buffer_text);
-buffer_delete(b);
 
-var commands = obj_prepare_commands(text);
-file = obj_parse_objects(commands);
-
-vertex_begin(vb, vformat_main);
-
-struct_foreach(file.objects, function(name, _) {
-	file.write_to_buffer(vb, name);
+oIoSystem.obj_load_async(get_open_filename("OBJ File|*.obj", ""), function(data, err) {
+	
+	if (is_instanceof(err, Err)) {
+		show_error(err.toString(), true);
+	}
+	
+	self.vb = vertex_create_buffer();
+	
+	var objects = struct_get_names(data.objects);
+	
+	for (var i = 0; i < array_length(objects); i ++) {
+		
+		var object = objects[i];
+		data.write_to_buffer(self.vb, object);
+		
+	}
+	
+	vertex_freeze(self.vb);
+	
 });
-
-file.destroy();
-
-vertex_end(vb);
-vertex_freeze(vb);

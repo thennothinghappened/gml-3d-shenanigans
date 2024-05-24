@@ -1,3 +1,5 @@
 /// @desc 
 
-vertex_delete_buffer(vb);
+if (vb != undefined) {
+	vertex_delete_buffer(vb);
+}

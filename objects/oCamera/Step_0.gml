@@ -1,5 +1,6 @@
 /// @desc 
 
+var horizontal_input = real(keyboard_check(ord("W"))) - real(keyboard_check(ord("S")));
 var mouse_move_x = window_mouse_get_delta_x();
 var mouse_move_y = window_mouse_get_delta_y();
 
@@ -9,6 +10,10 @@ window_height = window_get_height();
 if (keyboard_check_pressed(vk_escape)) {
 	mouselock = !mouselock;
 	window_mouse_set_locked(mouselock);
+}
+
+if (keyboard_check_pressed(vk_enter)) {
+	instance_create_depth(0, 0, 0, oCube);
 }
 
 look_angle.horizontal -= mouse_move_x * mouse_look_sensitivity;
@@ -26,8 +31,6 @@ var y_lookfrom = sin(look_angle.horizontal);
 var z_lookfrom = sin(look_angle.vertical);
 x_lookfrom *= cos(look_angle.vertical);
 y_lookfrom *= cos(look_angle.vertical);
-
-var horizontal_input = real(keyboard_check(ord("W"))) - real(keyboard_check(ord("S")));
 
 x -= x_lookfrom * horizontal_input;
 y -= y_lookfrom * horizontal_input;

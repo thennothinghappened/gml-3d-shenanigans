@@ -19,5 +19,3 @@ window_width = window_get_width();
 window_height = window_get_height();
 
 surface_resize(application_surface, window_width, window_height);
-
-instance_create_depth(0, 0, 0, oCube);

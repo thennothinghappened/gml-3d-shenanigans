@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"EventEmitter",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"EventEmitter",
+  "parent":{
+    "name":"EventEmitter",
+    "path":"folders/Scripts/Util/EventEmitter.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
