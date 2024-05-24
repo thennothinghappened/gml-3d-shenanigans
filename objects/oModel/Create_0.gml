@@ -1,4 +1,4 @@
-/// @desc 
+/// @desc Instantiate a model from an OBJ file at a random position.
 
 x = random_range(-50, 50);
 y = random_range(-50, 50);
@@ -8,7 +8,7 @@ vb = undefined;
 
 sprite_index = sTest;
 
-oIoSystem.obj_load_async(get_open_filename("OBJ File|*.obj", ""), function(data, err) {
+oIoSystem.obj_load_async(filename, function(data, err) {
 	
 	if (is_instanceof(err, Err)) {
 		show_error(err.toString(), true);

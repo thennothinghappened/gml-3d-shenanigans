@@ -39,9 +39,10 @@
   "name":"3dshenanigans",
   "resources":[
     {"id":{"name":"oCamera","path":"objects/oCamera/oCamera.yy",},},
-    {"id":{"name":"oCube","path":"objects/oCube/oCube.yy",},},
     {"id":{"name":"oGame","path":"objects/oGame/oGame.yy",},},
     {"id":{"name":"oIoSystem","path":"objects/oIoSystem/oIoSystem.yy",},},
+    {"id":{"name":"oModel","path":"objects/oModel/oModel.yy",},},
+    {"id":{"name":"oWorkManager","path":"objects/oWorkManager/oWorkManager.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
     {"id":{"name":"Err","path":"scripts/Err/Err.yy",},},
     {"id":{"name":"EventEmitter","path":"scripts/EventEmitter/EventEmitter.yy",},},

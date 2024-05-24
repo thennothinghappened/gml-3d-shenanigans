@@ -1,16 +1,7 @@
 /// @desc IO handling system with async loading & caching.
 
-/// Minimum number of building commands to process per frame, even if our framerate is suffering.
-self.obj_build_queue_min_command_count = 10;
-
-/// Time in microseconds the frame started at for determining what work we can do.
-self.__frame_start = 0;
-
 /// Cache of previously loaded OBJ files to re-use.
 self.obj_cache = {};
-
-/// Queue of objects currently building.
-self.obj_build_queue = ds_queue_create();
 
 /// Map of IO events by their handles.
 self.io_events = ds_map_create();
@@ -72,7 +63,19 @@ obj_load_async = function(filename, callback) {
 		var file = new ObjFile();
 		
 		oIoSystem.obj_cache[$ filename] = file;
-		ds_queue_enqueue(oIoSystem.obj_build_queue, file);
+		
+		oWorkManager.job_enqueue(method({ file }, function() {
+			
+			if (file.build_parse_next_command() == false) {
+				
+				file.build_finish();
+				return true;
+				
+			}
+			
+			return false;
+			
+		}));
 		
 		file.build_start(commands);
 		

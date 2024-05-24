@@ -12,8 +12,16 @@ if (keyboard_check_pressed(vk_escape)) {
 	window_mouse_set_locked(mouselock);
 }
 
-if (keyboard_check_pressed(vk_enter)) {
-	instance_create_depth(0, 0, 0, oCube);
+if (keyboard_check_pressed(ord("L"))) {
+	
+	var filename = get_open_filename("OBJ File|*.obj", "");
+	
+	if (filename != "") {
+		instance_create_depth(0, 0, 0, oModel, {
+			filename
+		});
+	}
+	
 }
 
 look_angle.horizontal -= mouse_move_x * mouse_look_sensitivity;
