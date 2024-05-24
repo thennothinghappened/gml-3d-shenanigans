@@ -1,7 +1,10 @@
 /// @desc IO handling system with async loading & caching.
 
-/// How many commands process per build cycle for an object.
-self.obj_build_queue_command_count = 1000;
+/// Minimum number of building commands to process per frame, even if our framerate is suffering.
+self.obj_build_queue_min_command_count = 10;
+
+/// Time in microseconds the frame started at for determining what work we can do.
+self.__frame_start = 0;
 
 /// Cache of previously loaded OBJ files to re-use.
 self.obj_cache = {};
