@@ -8,8 +8,26 @@ self.io_events = ds_map_create();
 
 /// Asynchronously load the given file, running the callback on success or failure.
 /// 
-/// @param {String} filename
-/// @param {Function} callback `(data: Id.Buffer, err?: Struct.Err) -> undefined`
+/// The callback passed has the responsibility of cleaning up the data buffer on success.
+/// 
+/// > ```gml
+/// > oIoSystem.file_load_async("test.txt", function(data, err) {
+/// > 	
+/// > 	if (is_instanceof(err, Err)) {
+/// > 		show_error(err.toString(), true);
+/// > 	}
+/// > 
+/// > 	var text = buffer_read(data, buffer_text);
+/// > 	buffer_delete(data);
+/// > 	
+/// > 	show_message(text);
+/// > 
+/// > });
+/// > ```
+/// 
+/// @param {String} filename Name of the file to be loaded.
+/// @param {Function} callback `(data?: Id.Buffer, err?: Struct.Err) -> undefined`
+/// 
 file_load_async = function(filename, callback) {
 	
 	var buf = buffer_create(0, buffer_grow, 1);
@@ -34,6 +52,7 @@ file_load_async = function(filename, callback) {
 /// @param {Function} callback `(data: Struct.ObjFile?, err?: Struct.Err) -> undefined`
 obj_load_async = function(filename, callback) {
 	
+	/// @type {Struct.ObjFile|Undefined}
 	var cached = self.obj_cache[$ filename];
 	
 	if (is_instanceof(cached, ObjFile)) {

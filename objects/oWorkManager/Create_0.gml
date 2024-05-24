@@ -14,7 +14,26 @@ self.__frame_start = 0;
 self.work_queue = ds_queue_create();
 
 /// Add a job to the work queue. The job is a callback which returns true when it is done.
-/// @param {Function} job `() -> Bool`
+/// 
+/// > ```gml
+/// > oWorkManager.job_enqueue(function() {
+/// >	
+/// > 	static iteration = 0;
+/// > 
+/// > 	show_debug_message(iteration);
+/// > 
+/// > 	if (iteration > 20) {
+/// > 		return true;
+/// > 	}
+/// >	
+/// > 	iteration ++;
+/// > 	return false;
+/// >	
+/// > });
+/// > ```
+/// 
+/// @param {Function} job `() -> Bool` The Job to enqueue.
+/// 
 job_enqueue = function(job) {
 	ds_queue_enqueue(self.work_queue, job);
 }

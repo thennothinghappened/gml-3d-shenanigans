@@ -4,6 +4,7 @@ x = random_range(-50, 50);
 y = random_range(-50, 50);
 z = random_range(-50, 50);
 
+/// @type {Id.VertexBuffer|Undefined} The vertex buffer for this model instance.
 vb = undefined;
 
 sprite_index = sTest;
