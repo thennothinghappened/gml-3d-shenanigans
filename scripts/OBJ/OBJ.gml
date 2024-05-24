@@ -134,80 +134,52 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 		switch (type) {
 			
 			case "g":
-			case "o": {
-				
+			case "o":
 				self.__build_object_start(string_join_ext(" ", cmd));
-				break;
-				
-			}
+			break;
 			
-			case "s": {
-				
+			case "s":
 				self.smooth_shading = bool(real(cmd[0]));
-				break;
-				
-			}
+			break;
 			
-			case "v": {
-				
+			case "v":
 				buffer_write(self.verts, buffer_f32, real(cmd[X]));
 				buffer_write(self.verts, buffer_f32, real(cmd[Y]));
 				buffer_write(self.verts, buffer_f32, real(cmd[Z]));
-				
-				break;
-				
-			}
+			break;
 			
-			case "vt": {
-				
+			case "vt":
 				buffer_write(self.texcoords, buffer_f32, real(cmd[X]));
 				buffer_write(self.texcoords, buffer_f32, real(cmd[Y]));
-				
-				break;
-				
-			}
+			break;
 			
-			case "vn": {
-				
+			case "vn":
 				buffer_write(self.normals, buffer_f32, real(cmd[X]));
 				buffer_write(self.normals, buffer_f32, real(cmd[Y]));
 				buffer_write(self.normals, buffer_f32, real(cmd[Z]));
-				
-				break;
-				
-			}
+			break;
 			
-			case "f": {
-				
+			case "f":
 				self.__build_face_parse_command(cmd);
-				break;
-				
-			}
+			break;
 			
 			case "usemtl":
-			case "mtllib": {
-				
+			case "mtllib":
 				if (OBJ_DEBUG_MESSAGES) {
 					show_debug_message("TODO: MTL support");
 				}
-				
-				break;
-				
-			}
+			break;
 			
-			case "l": {
-				
+			case "l":
 				if (OBJ_DEBUG_MESSAGES) {
 					show_debug_message("Lines are not supported in OBJ files!");
-				}
-					
-				break;
-				
-			}
+				}	
+			break;
 			
-			default: {
+			default:
 				throw $"Unknown/Unsupported command type `{type}` in command `{cmd}`";
-			}
+			break;
+
 		}
 		
 	}
@@ -328,7 +300,6 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 	}
 	
 	static toString = function() {
-		return $"{instanceof(self)}(name={self.name}, verts={self.verts}, faces={self.faces}, texcoords={self.texcoords}, normals={self.normals}, smooth_shading={string_bool(self.smooth_shading)})";
 	}
 	
 }
