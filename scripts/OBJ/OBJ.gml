@@ -300,6 +300,7 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 	}
 	
 	static toString = function() {
+		return $"{instanceof(self)}(objects={self.objects}, verts={self.verts}, texcoords={self.texcoords}, normals={self.normals}, smooth_shading={string_bool(self.smooth_shading)})";
 	}
 	
 }
