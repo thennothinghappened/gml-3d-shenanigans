@@ -18,7 +18,8 @@ file_load_async = function(filename, callback) {
 	self.io_events[? handle] = method({ callback, buf }, function(success) {
 		
 		if (!success) {
-			return callback(buf, new Err("Failed to read the file."));
+			buffer_delete(buf);
+			return callback(undefined, new Err("Failed to read the file."));
 		}
 		
 		return callback(buf, undefined);
@@ -50,10 +51,7 @@ obj_load_async = function(filename, callback) {
 	file_load_async(filename, method({ callback, filename }, function(data, err) {
 		
 		if (is_instanceof(err, Err)) {
-		
-			buffer_delete(data);
 			return callback(undefined, new Err($"Failed to load the OBJ file `{filename}`", err));
-		
 		}
 	
 		var text = buffer_read(data, buffer_text);
