@@ -1,8 +1,11 @@
 
 /// Get the project's main vertex format.
+/// @returns {Id.VertexFormat}
 function __vformat_main_get() {
 	
 	static __ready = false;
+
+	/// @type {Id.VertexFormat|Undefined}
 	static __vfmt = undefined;
 	
 	if (!__ready) {
