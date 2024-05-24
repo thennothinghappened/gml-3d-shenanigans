@@ -61,3 +61,6 @@ Temporary Items
 # GMEdit Constructor Cache directory
 cache
 
+# Stitch Temp directory (I'm trying a lot of tools lol)
+tmp
+output
