@@ -9,7 +9,6 @@ function EventEmitter(event_names) constructor {
 	/// 
 	/// @param {String} event Event to listen to.
 	/// @param {Function} listener Callback to listen with.
-	/// @returns {Enum.EventAddListenerResult}
 	static on = function(event, listener) {
 		
 		self.__ensure_event(event);
@@ -21,7 +20,6 @@ function EventEmitter(event_names) constructor {
 	/// 
 	/// @param {String} event Event listening to.
 	/// @param {Function} listener Callback to remove from the list.
-	/// @returns {Enum.EventRemoveListenerResult}
 	static off = function(event, listener) {
 		
 		self.__ensure_event(event);
@@ -44,7 +42,6 @@ function EventEmitter(event_names) constructor {
 	/// 
 	/// @param {String} event Event name to emit.
 	/// @param {Struct|undefined} [params] Parameters to send
-	/// @returns {Enum.EventEmitResult}
 	static emit = function(event, params) {
 		
 		self.__ensure_event(event);
@@ -58,7 +55,6 @@ function EventEmitter(event_names) constructor {
 	/// [Protected] Add an event name to the list of events.
 	/// 
 	/// @param {String} event Event name to add.
-	/// @returns {Enum.EventAddResult}
 	static register = function(event) {
 		self.events[$ event] = [];
 	}
