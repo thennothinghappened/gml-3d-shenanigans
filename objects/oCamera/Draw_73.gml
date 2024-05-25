@@ -1,3 +1,0 @@
-/// @desc 
-
-shader_reset();

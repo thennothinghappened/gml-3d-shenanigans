@@ -9,6 +9,7 @@ varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 
 uniform vec3 light_direction;
+uniform vec4 light_ambient_colour;
 
 void main() {
 	
@@ -17,7 +18,7 @@ void main() {
 	
 	float light_intensity = max(dot(normalize(in_Normal), normalize(light_direction)), 0.0);
     
-    v_vColour = vec4(in_Colour.rgb * light_intensity, in_Colour.a);
+    v_vColour = vec4(in_Colour.rgb * light_intensity + light_ambient_colour.rgb, in_Colour.a + light_ambient_colour.a);
     v_vTexcoord = in_TextureCoord;
 	
 }
