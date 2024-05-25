@@ -64,3 +64,6 @@ cache
 # Stitch Temp directory (I'm trying a lot of tools lol)
 tmp
 output
+
+# GMRT's build folder
+Build
