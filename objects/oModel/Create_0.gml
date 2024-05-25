@@ -9,6 +9,7 @@ vb = undefined;
 
 sprite_index = sTest;
 
+/// @instancevar {String} filename
 oIoSystem.obj_load_async(filename, function(data, err) {
 	
 	if (is_instanceof(err, Err)) {
