@@ -5,9 +5,6 @@ var left_right_input = real(keyboard_check(ord("D"))) - real(keyboard_check(ord(
 var mouse_move_x = window_mouse_get_delta_x();
 var mouse_move_y = window_mouse_get_delta_y();
 
-window_width = window_get_width();
-window_height = window_get_height();
-
 if (keyboard_check_pressed(vk_escape)) {
 	mouselock = !mouselock;
 	window_mouse_set_locked(mouselock);

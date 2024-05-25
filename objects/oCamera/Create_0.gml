@@ -1,21 +1,16 @@
 /// @desc 
 
-testing_light_dir = [0, 0.2, 0.5];
+self.testing_light_dir = [0, 0.2, 0.5];
 
-cam = camera_create();
+self.__gml_camera = camera_create();
 
-look_angle = {
+self.look_distance = 10;
+self.look_angle = {
 	vertical: 0,
 	horizontal: 0
 };
 
-look_distance = 10;
+self.mouselock = false;
+self.mouse_look_sensitivity = 0.005;
 
-mouselock = false;
-
-mouse_look_sensitivity = 0.005;
-
-window_width = window_get_width();
-window_height = window_get_height();
-
-surface_resize(application_surface, window_width, window_height);
+self.aspect_ratio = window.aspect_ratio;

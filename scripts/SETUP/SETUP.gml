@@ -13,4 +13,8 @@ display_reset(2, false);
 
 #endregion
 
+#region Window
 
+window.init();
+
+#endregion

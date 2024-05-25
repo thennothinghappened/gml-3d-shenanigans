@@ -1,0 +1,13 @@
+{
+  "$GMScript":"",
+  "%Name":"AppWindow",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"AppWindow",
+  "parent":{
+    "name":"GUI",
+    "path":"folders/Scripts/GUI.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
