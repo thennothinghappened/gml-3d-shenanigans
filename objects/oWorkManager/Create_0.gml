@@ -10,6 +10,12 @@ self.queue_min_count = 10;
 /// Time in microseconds the frame started at for determining what work we can do.
 self.__frame_start = 0;
 
+/// Number of frames to smooth the work accumulation average over.
+self.__work_done_accumulator_frames = 10;
+
+/// Accumulator for the amount of work being done on average.
+self.__work_done_accumulator = array_create(self.__work_done_accumulator_frames, 0);
+
 /// Queue of backround work callbacks.
 self.work_queue = ds_queue_create();
 
@@ -36,4 +42,12 @@ self.work_queue = ds_queue_create();
 /// 
 job_enqueue = function(job) {
 	ds_queue_enqueue(self.work_queue, job);
+}
+
+/// Get the average amount of work performed per frame.
+/// @returns {Real}
+work_get_frame_average = function() {
+	return array_reduce(self.__work_done_accumulator, function(prev, current) {
+		return prev + current;
+	}) / self.__work_done_accumulator_frames;
 }

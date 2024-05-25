@@ -29,3 +29,6 @@ while (true) {
 	work_done ++;
 	
 }
+
+array_shift(self.__work_done_accumulator);
+array_push(self.__work_done_accumulator, work_done);
