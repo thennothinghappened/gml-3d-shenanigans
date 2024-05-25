@@ -1,6 +1,7 @@
 /// @desc 
 
-var horizontal_input = real(keyboard_check(ord("W"))) - real(keyboard_check(ord("S")));
+var forward_backward_input = real(keyboard_check(ord("W"))) - real(keyboard_check(ord("S")));
+var left_right_input = real(keyboard_check(ord("D"))) - real(keyboard_check(ord("A")));
 var mouse_move_x = window_mouse_get_delta_x();
 var mouse_move_y = window_mouse_get_delta_y();
 
@@ -40,8 +41,11 @@ var z_lookfrom = sin(look_angle.vertical);
 x_lookfrom *= cos(look_angle.vertical);
 y_lookfrom *= cos(look_angle.vertical);
 
-x -= x_lookfrom * horizontal_input;
-y -= y_lookfrom * horizontal_input;
-z -= z_lookfrom * horizontal_input;
+x -= x_lookfrom * forward_backward_input;
+y -= y_lookfrom * forward_backward_input;
+z -= z_lookfrom * forward_backward_input;
+
+x -= left_right_input * cos(look_angle.horizontal - (pi / 2));
+y -= left_right_input * sin(look_angle.horizontal - (pi / 2));
 
 z += real(keyboard_check(vk_space)) - real(keyboard_check(vk_shift));
