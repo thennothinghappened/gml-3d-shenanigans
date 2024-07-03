@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"struct_map_to_array",
   "isCompatibility":false,
   "isDnD":false,

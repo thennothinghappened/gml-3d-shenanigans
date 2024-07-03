@@ -1,5 +1,5 @@
 {
-  "$GMScript":"",
+  "$GMScript":"v1",
   "%Name":"modwrap",
   "isCompatibility":false,
   "isDnD":false,
