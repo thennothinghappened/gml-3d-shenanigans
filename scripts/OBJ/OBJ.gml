@@ -54,7 +54,7 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 	
 	/// Start building from a command list.
 	/// @param {Array<String>} commands
-	static build_start = function(commands) {
+	static buildBegin = function(commands) {
 		
 		if (OBJ_DEBUG_CHECKS) {
 			if (self.build_status != ObjBuildStatus.NoCommandList) {
@@ -66,12 +66,12 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 		self.__build_command_list = commands;
 		self.__build_command_index = 0;
 		self.__build_command_count = array_length(commands);
-		self.__build_object_start("default_object");
+		self.__buildBeginObject("default_object");
 		
 	}
 	
 	/// Finish building from a command list.
-	static build_finish = function() {
+	static buildEnd = function() {
 		
 		if (OBJ_DEBUG_CHECKS) {
 			if (self.build_status != ObjBuildStatus.Building) {
@@ -93,7 +93,7 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 	
 	/// Parse the next OBJ file command.
 	/// @returns {Bool} Whether any commands remain.
-	static build_parse_next_command = function() {
+	static buildParseNext = function() {
 		
 		if (OBJ_DEBUG_CHECKS) {
 			
@@ -107,7 +107,7 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 			
 		}
 		
-		self.__build_parse_single_command(self.__build_command_list[self.__build_command_index++]);
+		self.__buildParseCommand(self.__build_command_list[self.__build_command_index++]);
 		return (self.__build_command_index < self.__build_command_count);
 		
 	}
@@ -115,7 +115,7 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 	/// Parse a singular OBJ file command while building.
 	/// 
 	/// @param {String} cmd_string
-	static __build_parse_single_command = function(cmd_string) {
+	static __buildParseCommand = function(cmd_string) {
 		
 		if (OBJ_DEBUG_CHECKS) {
 			if (self.build_status != ObjBuildStatus.Building) {
@@ -135,7 +135,7 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 			
 			case "g":
 			case "o":
-				self.__build_object_start(string_join_ext(" ", cmd));
+				self.__buildBeginObject(string_join_ext(" ", cmd));
 			break;
 			
 			case "s":
@@ -160,7 +160,7 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 			break;
 			
 			case "f":
-				self.__build_face_parse_command(cmd);
+				self.__buildFaceFromCommand(cmd);
 			break;
 			
 			case "usemtl":
@@ -188,7 +188,7 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 	/// 
 	/// @param {String} name
 	/// @returns {Id.VertexBuffer}
-	static __build_object_start = function(name) {
+	static __buildBeginObject = function(name) {
 		
 		if (OBJ_DEBUG_CHECKS) {
 			if (self.build_status != ObjBuildStatus.Building) {
@@ -211,7 +211,7 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 	/// Throws if the command is malformed.
 	/// 
 	/// @param {Array<String>} cmd
-	static __build_face_parse_command = function(cmd) {
+	static __buildFaceFromCommand = function(cmd) {
 		
 		if (OBJ_DEBUG_CHECKS && array_length(cmd) != 3) {
 			throw $"Invalid face command `{cmd}` - must have three components.";
@@ -266,7 +266,8 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 	/// 
 	/// @param {Id.VertexBuffer} vb
 	/// @param {String} name The object's name to append to the buffer.
-	static write_to_buffer = function(vb, name) {
+	/// 
+	static writeToBuffer = function(vb, name) {
 		
 		if (OBJ_DEBUG_CHECKS) {
 			if (self.build_status != ObjBuildStatus.Ready) {

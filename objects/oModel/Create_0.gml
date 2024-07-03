@@ -10,23 +10,20 @@ vb = undefined;
 sprite_index = sTest;
 
 /// @instancevar {String} filename
-oIoSystem.obj_load_async(filename, function(data, err) {
+game.ioSystem.objLoadAsync(filename, function(data, err) {
 	
 	if (is_instanceof(err, Err)) {
-		show_error(err.toString(), true);
+		show_error(string(err), true);
 	}
-	
-	self.vb = vertex_create_buffer();
 	
 	var objects = struct_get_names(data.objects);
+	vb = vertex_create_buffer();
 	
 	for (var i = 0; i < array_length(objects); i ++) {
-		
 		var object = objects[i];
-		data.write_to_buffer(self.vb, object);
-		
+		data.writeToBuffer(vb, object);
 	}
 	
-	vertex_freeze(self.vb);
+	vertex_freeze(vb);
 	
 });

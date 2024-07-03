@@ -1,7 +1,7 @@
 
 /// Information about the 3D environment, such as lighting.
 /// 
-/// @param {Array<Real>} light_sun_direction A vector representing the direction of the sun's lighting.
+/// @param {Array<Real>} light_sun_direction A 3D vector representing the direction of the sun's lighting.
 /// @param {Array<Real>} light_ambient_colour The colour of the ambient environment lighting.
 function Environment(
 	light_sun_direction,

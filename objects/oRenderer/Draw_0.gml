@@ -1,8 +1,12 @@
 /// @desc Draw the world.
 
+if (!instance_exists(activeCamera)) {
+	exit;
+}
+
 with (oModel) {
 	
-	var file = oIoSystem.obj_cache[$ self.filename];
+	var file = game.ioSystem.objCache[$ self.filename];
 	
 	if (file == undefined) {
 		continue;
@@ -11,11 +15,11 @@ with (oModel) {
 	switch (file.build_status) {
 		
 		case ObjBuildStatus.Building:
-			ds_queue_enqueue(other.loading_models, id);
+			ds_queue_enqueue(other.modelsLoading, id);
 		break;
 		
 		case ObjBuildStatus.Ready:
-			ds_queue_enqueue(other.renderable_models, id);
+			ds_queue_enqueue(other.modelsRenderable, id);
 		break;
 		
 		default: break;
@@ -24,18 +28,16 @@ with (oModel) {
 	
 }
 
-draw_clear(script_execute_ext(make_color_rgb, self.environment.light_ambient_colour));
-
-self.environment.light_sun_direction[X] = sin(current_time / 1000);
-self.environment.light_sun_direction[Y] = sin(current_time / 900);
+environment.light_sun_direction[X] = sin(current_time / 1000);
+environment.light_sun_direction[Y] = sin(current_time / 900);
 
 shader_set(shdVertexLit);
-shader_set_uniform_f_array(shader_get_uniform(shdVertexLit, "light_direction"), self.environment.light_sun_direction);
-shader_set_uniform_f_array(shader_get_uniform(shdVertexLit, "light_ambient_colour"), self.environment.light_ambient_colour_shader);
+shader_set_uniform_f_array(shader_get_uniform(shdVertexLit, "light_direction"), environment.light_sun_direction);
+shader_set_uniform_f_array(shader_get_uniform(shdVertexLit, "light_ambient_colour"), environment.light_ambient_colour_shader);
 
-while (ds_queue_size(renderable_models) > 0) {
+while (ds_queue_size(modelsRenderable) > 0) {
 	
-	with (ds_queue_dequeue(renderable_models)) {
+	with (ds_queue_dequeue(modelsRenderable)) {
 	
 		if (self.vb == undefined) {
 			continue;
@@ -51,11 +53,11 @@ while (ds_queue_size(renderable_models) > 0) {
 
 shader_reset();
 
-while (ds_queue_size(loading_models) > 0) {
+while (ds_queue_size(modelsLoading) > 0) {
 	
-	with (ds_queue_dequeue(loading_models)) {
+	with (ds_queue_dequeue(modelsLoading)) {
 		
-		var file = oIoSystem.obj_cache[$ self.filename];
+		var file = oIoSystem.objCache[$ self.filename];
 		
 		var processed = file.__build_command_index;
 		var total = file.__build_command_count;

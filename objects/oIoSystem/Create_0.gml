@@ -1,17 +1,17 @@
 /// @desc IO handling system with async loading & caching.
 
 /// Cache of previously loaded OBJ files to re-use.
-self.obj_cache = {};
+objCache = {};
 
 /// Map of IO events by their handles.
-self.io_events = ds_map_create();
+ioEvents = ds_map_create();
 
 /// Asynchronously load the given file, running the callback on success or failure.
 /// 
 /// The callback passed has the responsibility of cleaning up the data buffer on success.
 /// 
 /// > ```gml
-/// > oIoSystem.file_load_async("test.txt", function(data, err) {
+/// > oIoSystem.fileLoadAsync("test.txt", function(data, err) {
 /// > 	
 /// > 	if (is_instanceof(err, Err)) {
 /// > 		show_error(err.toString(), true);
@@ -28,12 +28,12 @@ self.io_events = ds_map_create();
 /// @param {String} filename Name of the file to be loaded.
 /// @param {Function} callback `(data?: Id.Buffer, err?: Struct.Err) -> undefined`
 /// 
-file_load_async = function(filename, callback) {
+fileLoadAsync = function(filename, callback) {
 	
 	var buf = buffer_create(0, buffer_grow, 1);
 	var handle = buffer_load_async(buf, filename, 0, -1);
 	
-	self.io_events[? handle] = method({ callback, buf }, function(success) {
+	ioEvents[? handle] = method({ callback, buf }, function(success) {
 		
 		if (!success) {
 			buffer_delete(buf);
@@ -50,10 +50,10 @@ file_load_async = function(filename, callback) {
 /// 
 /// @param {String} filename
 /// @param {Function} callback `(data: Struct.ObjFile?, err?: Struct.Err) -> undefined`
-obj_load_async = function(filename, callback) {
+objLoadAsync = function(filename, callback) {
 	
 	/// @type {Struct.ObjFile|Undefined}
-	var cached = self.obj_cache[$ filename];
+	var cached = objCache[$ filename];
 	
 	if (is_instanceof(cached, ObjFile)) {
 		
@@ -67,36 +67,34 @@ obj_load_async = function(filename, callback) {
 		
 	}
 	
-	file_load_async(filename, method({ callback, filename }, function(data, err) {
+	fileLoadAsync(filename, method({ callback, filename }, function(data, err) {
 		
 		if (is_instanceof(err, Err)) {
 			return callback(undefined, new Err($"Failed to load the OBJ file `{filename}`", err));
 		}
-	
+		
 		var text = buffer_read(data, buffer_text);
 		buffer_delete(data);
 		
 		var commands = obj_prepare_commands(text);
 		var file = new ObjFile();
 		
-		oIoSystem.obj_cache[$ filename] = file;
+		game.ioSystem.objCache[$ filename] = file;
 		
-		oWorkManager.job_enqueue(method({ file }, function() {
+		game.workManager.job_enqueue(method({ file }, function() {
 			
-			if (file.build_parse_next_command() == false) {
-				
-				file.build_finish();
+			if (file.buildParseNext() == false) {
+				file.buildEnd();
 				return true;
-				
 			}
 			
 			return false;
 			
 		}));
 		
-		file.build_start(commands);
+		file.buildBegin(commands);
 		
-		oIoSystem.obj_load_async(filename, callback);
+		game.ioSystem.objLoadAsync(filename, callback);
 		
 	}));
 	

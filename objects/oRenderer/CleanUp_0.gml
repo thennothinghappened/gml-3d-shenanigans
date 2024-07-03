@@ -1,5 +1,4 @@
-/// @desc Deallocate render queues and camera.
+/// @desc Deallocate render queues and remove owned camera.
 
-ds_queue_destroy(self.renderable_models);
-ds_queue_destroy(self.loading_models);
-instance_destroy(self.camera);
+ds_queue_destroy(modelsRenderable);
+ds_queue_destroy(modelsLoading);

@@ -12,12 +12,12 @@ self.look_angle = {
 self.mouselock = false;
 self.mouse_look_sensitivity = 0.005;
 
-self.aspect_ratio = window.aspect_ratio;
+self.aspect_ratio = game.window.aspect_ratio;
 
 /// Render from this camera's position.
-render_from = function() {
+apply = function() {
 
-	self.aspect_ratio = window.aspect_ratio;
+	self.aspect_ratio = game.window.aspect_ratio;
 
 	var x_lookfrom = cos(look_angle.horizontal) * look_distance;
 	var y_lookfrom = sin(look_angle.horizontal) * look_distance;

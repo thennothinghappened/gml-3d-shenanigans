@@ -12,6 +12,8 @@
   "Folders":[
     {"$GMFolder":"","%Name":"Animation Curves","folderPath":"folders/Animation Curves.yy","name":"Animation Curves","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Objects","folderPath":"folders/Objects.yy","name":"Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Control","folderPath":"folders/Objects/Control.yy","name":"Control","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"Render","folderPath":"folders/Objects/Control/Render.yy","name":"Render","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Rooms","folderPath":"folders/Rooms.yy","name":"Rooms","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Scripts","folderPath":"folders/Scripts.yy","name":"Scripts","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"3D","folderPath":"folders/Scripts/3D.yy","name":"3D","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -36,7 +38,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.4.1.152",
+    "IDEVersion":"2024.600.0.585",
   },
   "name":"3dshenanigans",
   "resources":[
@@ -44,6 +46,7 @@
     {"id":{"name":"oGame","path":"objects/oGame/oGame.yy",},},
     {"id":{"name":"oIoSystem","path":"objects/oIoSystem/oIoSystem.yy",},},
     {"id":{"name":"oModel","path":"objects/oModel/oModel.yy",},},
+    {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},},
     {"id":{"name":"oRenderer","path":"objects/oRenderer/oRenderer.yy",},},
     {"id":{"name":"oWorkManager","path":"objects/oWorkManager/oWorkManager.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
@@ -66,6 +69,7 @@
     {"id":{"name":"Vec2","path":"scripts/Vec2/Vec2.yy",},},
     {"id":{"name":"Vec3","path":"scripts/Vec3/Vec3.yy",},},
     {"id":{"name":"vformat","path":"scripts/vformat/vformat.yy",},},
+    {"id":{"name":"shdSkybox","path":"shaders/shdSkybox/shdSkybox.yy",},},
     {"id":{"name":"shdVertexLit","path":"shaders/shdVertexLit/shdVertexLit.yy",},},
     {"id":{"name":"sTest","path":"sprites/sTest/sTest.yy",},},
   ],

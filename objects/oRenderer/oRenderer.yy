@@ -11,8 +11,8 @@
   "name":"oRenderer",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Render",
+    "path":"folders/Objects/Control/Render.yy",
   },
   "parentObjectId":null,
   "persistent":false,
