@@ -10,20 +10,18 @@ ioEvents = ds_map_create();
 /// 
 /// The callback passed has the responsibility of cleaning up the data buffer on success.
 /// 
-/// > ```gml
-/// > oIoSystem.fileLoadAsync("test.txt", function(data, err) {
-/// > 	
-/// > 	if (is_instanceof(err, Err)) {
-/// > 		show_error(err.toString(), true);
-/// > 	}
-/// > 
-/// > 	var text = buffer_read(data, buffer_text);
-/// > 	buffer_delete(data);
-/// > 	
-/// > 	show_message(text);
-/// > 
-/// > });
-/// > ```
+/// ```gml
+/// oIoSystem.fileLoadAsync("test.txt", function(data, err) {
+/// 	if (is_instanceof(err, Err)) {
+/// 		show_error(err.toString(), true);
+/// 	}
+/// 
+/// 	var text = buffer_read(data, buffer_text);
+/// 	buffer_delete(data);
+/// 	
+/// 	show_message(text);
+/// });
+/// ```
 /// 
 /// @param {String} filename Name of the file to be loaded.
 /// @param {Function} callback `(data?: Id.Buffer, err?: Struct.Err) -> undefined`
