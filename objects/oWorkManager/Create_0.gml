@@ -32,11 +32,10 @@ self.work_queue = ds_queue_create();
 /// 	}
 /// 	
 /// 	iteration ++;
-/// 	return false;
 /// });
 /// ```
 /// 
-/// @param {Function} job `() -> Bool` The Job to enqueue.
+/// @param {Function} job `() -> Bool|Undefined` The Job to enqueue.
 /// 
 job_enqueue = function(job) {
 	ds_queue_enqueue(self.work_queue, job);

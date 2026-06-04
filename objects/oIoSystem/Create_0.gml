@@ -80,14 +80,10 @@ objLoadAsync = function(filename, callback) {
 		game.ioSystem.objCache[$ filename] = file;
 		
 		game.workManager.job_enqueue(method({ file }, function() {
-			
-			if (file.buildParseNext() == false) {
+			if (!file.buildParseNext()) {
 				file.buildEnd();
 				return true;
 			}
-			
-			return false;
-			
 		}));
 		
 		file.buildBegin(commands);

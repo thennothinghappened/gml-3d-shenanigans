@@ -22,7 +22,7 @@ while (true) {
 	var job = ds_queue_dequeue(self.work_queue);
 	var done = job();
 	
-	if (!done) {
+	if (done != true) {
 		ds_queue_enqueue(self.work_queue, job);
 	}
 	
