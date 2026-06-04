@@ -1,12 +1,12 @@
 {
   "$GMScript":"v1",
-  "%Name":"OBJ",
+  "%Name":"ModelManager",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"OBJ",
+  "name":"ModelManager",
   "parent":{
-    "name":"3D",
-    "path":"folders/Scripts/3D.yy",
+    "name":"IO",
+    "path":"folders/Scripts/IO.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

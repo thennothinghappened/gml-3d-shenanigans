@@ -1,23 +1,14 @@
-
+//
 /// Whether or not to perform debug checks to provide proper error messages.
 #macro OBJ_DEBUG_CHECKS false
 
 /// Whether to output debug messages.
 #macro OBJ_DEBUG_MESSAGES false
 
-/// Prepare an OBJ file's command list to be parsed.
-/// 
-/// @param {String} text
-/// @returns {Array<String>}
-function obj_prepare_commands(text) {
-	
-	var lines = string_split(text, "\n", true);
-	return lines;
-	
-}
-
 /// An OBJ file that contains objects.
-function ObjFile() : EventEmitter(["ready"]) constructor {
+/// 
+/// @param {String} commandsString List of OBJ command lines from an OBJ file.
+function ObjFile(commandsString) : EventEmitter(["ready"]) constructor {
 	
 	enum ObjFaceComponent {
 		Vertex		= 0,
@@ -26,15 +17,14 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 	}
 	
 	enum ObjBuildStatus {
-		NoCommandList,
 		Building,
 		Ready
 	}
 	
-	self.build_status = ObjBuildStatus.NoCommandList;
-	self.__build_command_list = undefined;
+	self.build_status = ObjBuildStatus.Building;
+	self.__build_command_list = string_split(commandsString, "\n", true);
 	self.__build_command_index = 0;
-	self.__build_command_count = 0;
+	self.__build_command_count = array_length(self.__build_command_list);
 	self.__build_current_object = undefined;
 	
 	self.verts = buffer_create(0, buffer_grow, 1);
@@ -52,33 +42,29 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 	buffer_write(self.normals, buffer_f32, 0);
 	buffer_write(self.normals, buffer_f32, 0);
 	
-	/// Start building from a command list.
-	/// @param {Array<String>} commands
-	static buildBegin = function(commands) {
-		
-		if (OBJ_DEBUG_CHECKS) {
-			if (self.build_status != ObjBuildStatus.NoCommandList) {
-				throw "Cannot start building from a command list when we are in the wrong state!";
-			}
-		}
-		
-		self.build_status = ObjBuildStatus.Building;
-		self.__build_command_list = commands;
-		self.__build_command_index = 0;
-		self.__build_command_count = array_length(commands);
-		self.__buildBeginObject("default_object");
-		
-	}
-	
-	/// Finish building from a command list.
-	static buildEnd = function() {
-		
+	/// Parse the next OBJ file command.
+	/// 
+	/// If none remain, this completes building and returns `true`.
+	/// 
+	/// @returns {Bool} Whether parsing is complete.
+	static buildParseNext = function() {
 		if (OBJ_DEBUG_CHECKS) {
 			if (self.build_status != ObjBuildStatus.Building) {
-				throw "Cannot finish building from a command list when we were not already building!";
+				throw "Cannot parse commands when not building!";
+			}
+			
+			if (self.__build_command_index >= self.__build_command_count) {
+				throw "Tried to parse the next command when none remain!";
 			}
 		}
 		
+		self.__buildParseCommand(self.__build_command_list[self.__build_command_index++]);
+		
+		if (self.__build_command_index < self.__build_command_count) {
+			return false;
+		}
+		
+		// Job done!
 		vertex_end(self.__build_current_object);
 		
 		self.build_status = ObjBuildStatus.Ready;
@@ -89,27 +75,7 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 		
 		self.emit("ready");
 		
-	}
-	
-	/// Parse the next OBJ file command.
-	/// @returns {Bool} Whether any commands remain.
-	static buildParseNext = function() {
-		
-		if (OBJ_DEBUG_CHECKS) {
-			
-			if (self.build_status != ObjBuildStatus.Building) {
-				throw "Cannot parse commands when not building!";
-			}
-			
-			if (self.__build_command_index >= self.__build_command_count) {
-				throw "Tried to parse the next command when none remain!";
-			}
-			
-		}
-		
-		self.__buildParseCommand(self.__build_command_list[self.__build_command_index++]);
-		return (self.__build_command_index < self.__build_command_count);
-		
+		return true;
 	}
 	
 	/// Parse a singular OBJ file command while building.
@@ -184,10 +150,9 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 		
 	}
 	
-	/// Add an object of the given name, returning its faces buffer.
+	/// Begin building the next object, identified by the given name.
 	/// 
 	/// @param {String} name
-	/// @returns {Id.VertexBuffer}
 	static __buildBeginObject = function(name) {
 		
 		if (OBJ_DEBUG_CHECKS) {
@@ -212,15 +177,17 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 	/// 
 	/// @param {Array<String>} cmd
 	static __buildFaceFromCommand = function(cmd) {
-		
 		if (OBJ_DEBUG_CHECKS && array_length(cmd) != 3) {
 			throw $"Invalid face command `{cmd}` - must have three components.";
+		}
+		
+		if (self.__build_current_object == undefined) {
+			self.__buildBeginObject("default_object");
 		}
 		
 		var object = self.__build_current_object;
 		
 		for (var i = 0; i < 3; i ++) {
-			
 			var point = string_split(cmd[i], "/", false, 3);
 			var length = array_length(point);
 			
@@ -257,9 +224,7 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 			vertex_texcoord(object, texcoordX, texcoordY);
 			vertex_normal(object, normalX, normalY, normalZ);
 			vertex_colour(object, c_white, 1);
-			
 		}
-		
 	}
 	
 	/// Write this object to the given vertex buffer.
@@ -268,7 +233,6 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 	/// @param {String} name The object's name to append to the buffer.
 	/// 
 	static writeToBuffer = function(vb, name) {
-		
 		if (OBJ_DEBUG_CHECKS) {
 			if (self.build_status != ObjBuildStatus.Ready) {
 				throw "Cannot write out to buffer when we're not ready!";
@@ -284,7 +248,6 @@ function ObjFile() : EventEmitter(["ready"]) constructor {
 			0,
 			vertex_get_number(object)
 		);
-		
 	}
 	
 	/// Clean up this OBJ file.

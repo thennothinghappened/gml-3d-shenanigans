@@ -1,17 +1,13 @@
-/// @desc Instantiate a model from an OBJ file at a random position.
-
-x = random_range(-50, 50);
-y = random_range(-50, 50);
-z = random_range(-50, 50);
+/// @desc Instantiate a model from an OBJ file.
 
 /// @type {Id.VertexBuffer|Undefined} The vertex buffer for this model instance.
 vb = undefined;
 
+/// The texture to draw for this model.
 sprite_index = sTest;
 
 /// @instancevar {String} filename
-game.ioSystem.objLoadAsync(filename, function(data, err) {
-	
+game.modelManager.objLoadAsync(filename, function(data, err) {
 	if (is_instanceof(err, Err)) {
 		show_error(string(err), true);
 	}
@@ -25,5 +21,4 @@ game.ioSystem.objLoadAsync(filename, function(data, err) {
 	}
 	
 	vertex_freeze(vb);
-	
 });

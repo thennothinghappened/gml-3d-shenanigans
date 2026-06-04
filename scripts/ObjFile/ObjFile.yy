@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"ObjFile",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"ObjFile",
+  "parent":{
+    "name":"IO",
+    "path":"folders/Scripts/IO.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
