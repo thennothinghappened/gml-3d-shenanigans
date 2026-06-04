@@ -1,5 +1,2 @@
-/// @desc A player object, who owns a camera.
-
-camera = instance_create_3d(x, y, z, oCamera);
-
-
+/// @desc A player in the 3D world who we can look from and move around as.
+camera = new Camera();

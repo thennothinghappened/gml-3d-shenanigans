@@ -1,6 +1,6 @@
 /// @desc Draw the world.
 
-if (!instance_exists(activeCamera)) {
+if (activeCamera == undefined) {
 	exit;
 }
 

@@ -1,8 +1,6 @@
 /// @desc Setup rendering with our camera.
 
-
-
-if (!instance_exists(activeCamera)) {
+if (activeCamera == undefined) {
 	exit;
 }
 

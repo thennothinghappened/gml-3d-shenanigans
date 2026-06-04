@@ -2,16 +2,16 @@
 
 var forward_backward_input = real(keyboard_check(ord("W"))) - real(keyboard_check(ord("S")));
 var left_right_input = real(keyboard_check(ord("D"))) - real(keyboard_check(ord("A")));
+var up_down_input = real(keyboard_check(vk_space)) - real(keyboard_check(vk_shift));
+
 var mouse_move_x = window_mouse_get_delta_x();
 var mouse_move_y = window_mouse_get_delta_y();
 
+if (keyboard_check_pressed(vk_escape)) {
+	camera.mouselock = !camera.mouselock;
+}
+
 with (camera) {
-	
-	if (keyboard_check_pressed(vk_escape)) {
-		mouselock = !mouselock;
-		window_mouse_set_locked(mouselock);
-	}
-	
 	look_angle.horizontal -= mouse_move_x * mouse_look_sensitivity;
 	look_angle.vertical += mouse_move_y * mouse_look_sensitivity;
 	
@@ -20,21 +20,22 @@ with (camera) {
 	
 	look_distance += real(keyboard_check(ord("Q"))) - real(keyboard_check(ord("E")));
 	look_distance = max(1, look_distance);
-	
-	var x_lookfrom = cos(look_angle.horizontal);
-	var y_lookfrom = sin(look_angle.horizontal);
-	
-	var z_lookfrom = sin(look_angle.vertical);
-	x_lookfrom *= cos(look_angle.vertical);
-	y_lookfrom *= cos(look_angle.vertical);
-	
-	x -= x_lookfrom * forward_backward_input;
-	y -= y_lookfrom * forward_backward_input;
-	z -= z_lookfrom * forward_backward_input;
-	
-	x -= left_right_input * cos(look_angle.horizontal - (pi / 2));
-	y -= left_right_input * sin(look_angle.horizontal - (pi / 2));
-	
-	z += real(keyboard_check(vk_space)) - real(keyboard_check(vk_shift));
-	
 }
+
+var x_lookfrom = cos(camera.look_angle.horizontal);
+var y_lookfrom = sin(camera.look_angle.horizontal);
+
+var z_lookfrom = sin(camera.look_angle.vertical);
+x_lookfrom *= cos(camera.look_angle.vertical);
+y_lookfrom *= cos(camera.look_angle.vertical);
+
+x -= x_lookfrom * forward_backward_input;
+y -= y_lookfrom * forward_backward_input;
+z -= z_lookfrom * forward_backward_input;
+
+x -= left_right_input * cos(camera.look_angle.horizontal - (pi / 2));
+y -= left_right_input * sin(camera.look_angle.horizontal - (pi / 2));
+
+z += up_down_input;
+
+camera.setPosition(x, y, z);
