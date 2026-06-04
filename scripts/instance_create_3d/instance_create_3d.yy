@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"instance_create_3d",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"instance_create_3d",
+  "parent":{
+    "name":"3D",
+    "path":"folders/Scripts/3D.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
