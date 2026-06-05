@@ -12,3 +12,6 @@ window.init();
 
 player = instance_create_depth(0, 0, 0, oPlayer);
 renderer.activeCamera = player.camera;
+
+instance_create_3d(0, 0, 0, oModel, { filename: "/home/thennothing/Downloads/alligator.obj" });
+instance_create_3d(0, 0, 0, oModel, { filename: "/home/thennothing/Downloads/xyzrgb_dragon_with_normals.obj" });

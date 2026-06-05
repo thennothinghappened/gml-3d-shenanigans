@@ -29,5 +29,4 @@ shader_reset();
 draw_set_colour(c_white);
 gpu_set_zwriteenable(true);
 
-// Apply the camera.
 activeCamera.apply();

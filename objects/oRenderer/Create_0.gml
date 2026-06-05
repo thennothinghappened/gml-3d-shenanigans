@@ -9,9 +9,3 @@ if (!variable_instance_exists(self, "environment")) {
 
 /// The active camera to render with, if any.
 activeCamera = undefined;
-
-/// Queue of {@link Asset.GMObject.oModel} instances that can be rendered.
-modelsRenderable = ds_queue_create();
-
-/// Queue of {@link Asset.GMObject.oModel} instances that are currently loading in.
-modelsLoading = ds_queue_create();
